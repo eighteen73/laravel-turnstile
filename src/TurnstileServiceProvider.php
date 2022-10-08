@@ -2,6 +2,7 @@
 
 namespace Eighteen73\Turnstile;
 
+use Eighteen73\Turnstile\Http\Middleware\TurnstileMiddleware;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,7 @@ class TurnstileServiceProvider extends ServiceProvider
     {
         $this->configurePublishing();
         $this->configureDirectives();
+        $this->configureMiddleware();
     }
 
     /**
@@ -54,6 +56,22 @@ class TurnstileServiceProvider extends ServiceProvider
         });
         Blade::directive('turnstile', function () {
             return '<div class="cf-turnstile" data-sitekey="'.config('turnstile.key').'" data-callback="javascriptCallback"></div>';
+        });
+    }
+
+    /**
+     * Configure middleware that checks the submitted code.
+     *
+     * @return void
+     */
+    protected function configureMiddleware()
+    {
+        if (config('turnstile.mode') !== 'middleware') {
+            return;
+        }
+        $this->app->booted(function () {
+            $router = app('router');
+            $router->pushMiddlewareToGroup('web', TurnstileMiddleware::class);
         });
     }
 }
