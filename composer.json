@@ -21,6 +21,13 @@
             "Eighteen73\\Turnstile\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Eighteen73\\Turnstile\\TurnstileServiceProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
