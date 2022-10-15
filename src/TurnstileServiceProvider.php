@@ -2,7 +2,7 @@
 
 namespace Eighteen73\Turnstile;
 
-use Eighteen73\Turnstile\Http\Middleware\TurnstileMiddleware;
+use Eighteen73\Turnstile\Http\Middleware\Turnstile;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -51,7 +51,7 @@ class TurnstileServiceProvider extends ServiceProvider
      */
     protected function configureDirectives()
     {
-        Blade::directive('turnstile_script', function () {
+        Blade::directive('turnstileScripts', function () {
             return '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>';
         });
         Blade::directive('turnstile', function () {
@@ -71,7 +71,7 @@ class TurnstileServiceProvider extends ServiceProvider
         }
         $this->app->booted(function () {
             $router = app('router');
-            $router->pushMiddlewareToGroup('web', TurnstileMiddleware::class);
+            $router->pushMiddlewareToGroup('web', Turnstile::class);
         });
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\InvokableRule;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
-class TurnstileRule implements InvokableRule
+class Turnstile implements InvokableRule
 {
     /**
      * Run the validation rule.

@@ -31,7 +31,7 @@ TURNSTILE_SECRET=your-secret-key
 
 First, you want to ensure that the Turnstile JavaScript is included on your website. Turnstile analyses various telemetry and client behavior exhibited during a session so this script should be included site-wide.
 
-Use the Blade directive `@turnstile_script` as follows:
+Use the Blade directive `@turnstileScripts` as follows:
 
 ```html
 <html>
@@ -42,7 +42,7 @@ Use the Blade directive `@turnstile_script` as follows:
 
     <!-- The rest of your template -->
     
-    @turnstile_script
+    @turnstileScripts
 
 </body>
 </html>
@@ -84,12 +84,12 @@ This gives more flexibility but requires you to manually add the Turnstile respo
 For example:
 
 ```php
-use Eighteen73\Turnstile\Rules\TurnstileRule;
+use Eighteen73\Turnstile\Rules\Turnstile;
 
 $request->validate([
     'email' => 'required|email',
     'password' => 'required',
-    'cf-turnstile-response' => [new TurnstileRule],
+    'cf-turnstile-response' => [new Turnstile],
 ]);
 ```
 

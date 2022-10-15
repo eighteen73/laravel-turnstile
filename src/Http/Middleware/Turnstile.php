@@ -3,15 +3,21 @@
 namespace Eighteen73\Turnstile\Http\Middleware;
 
 use Closure;
-use Eighteen73\Turnstile\Rules\TurnstileRule;
-use Illuminate\Http\Request;
+use Eighteen73\Turnstile\Rules\Turnstile as TurnstileRule;
 use Illuminate\Support\Facades\Validator;
 
-class TurnstileMiddleware
+class Turnstile
 {
     const INPUT_NAME = 'cf-turnstile-response';
 
-    public function handle(Request $request, Closure $next)
+    /**
+     * Handle the incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return \Illuminate\Http\Response|null
+     */
+    public function handle($request, Closure $next)
     {
         // We're only interested in requests with a Turnstile response code
         if (! $request->has(self::INPUT_NAME)) {
