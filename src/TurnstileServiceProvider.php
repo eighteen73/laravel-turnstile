@@ -55,7 +55,7 @@ class TurnstileServiceProvider extends ServiceProvider
             return '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>';
         });
         Blade::directive('turnstile', function () {
-            return '<div class="cf-turnstile" data-sitekey="'.config('turnstile.key').'" data-callback="javascriptCallback"></div>';
+            return '<div class="cf-turnstile" data-sitekey="'.config('turnstile.key').'" data-callback="onTurnstileSuccess"></div>';
         });
     }
 
